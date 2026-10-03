@@ -1,0 +1,29 @@
+{
+  "duration": 42.75,
+  "arrivals": [
+    {
+      "slug": "cab-racao",
+      "time": 5.75
+    },
+    {
+      "slug": "tchiowa-net",
+      "time": 11.5
+    },
+    {
+      "slug": "atc",
+      "time": 19.25
+    },
+    {
+      "slug": "angbu-empreitada",
+      "time": 27.0
+    },
+    {
+      "slug": "angbu-telecom",
+      "time": 36.75
+    },
+    {
+      "slug": "angbu-comercio",
+      "time": 42.65
+    }
+  ]
+}
