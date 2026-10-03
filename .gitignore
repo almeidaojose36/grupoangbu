@@ -1,0 +1,16 @@
+# Dependencies & build output
+node_modules/
+dist/
+
+# Raw media sources (the site uses the encoded files in public/media)
+recent images/
+Option B/
+video-sources/
+public/images/
+
+# Internal documents
+Company Profile.md
+
+# OS / editor
+.DS_Store
+*.log
