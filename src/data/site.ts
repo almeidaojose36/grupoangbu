@@ -3,7 +3,10 @@
 export const FOUNDED = 2017
 export const yearsActive = () => new Date().getFullYear() - FOUNDED
 
-export const LOGO = '/brand/angbu-logo.webp'
+/** Public-folder URL that works both at a domain root and under a sub-path (GitHub Pages). */
+export const asset = (path: string) => import.meta.env.BASE_URL + path.replace(/^\//, '')
+
+export const LOGO = asset('brand/angbu-logo.webp')
 
 export const contact = {
     email: 'angbu@grupoangbu.com',
@@ -278,9 +281,9 @@ export const companies: Company[] = [
 const small = () => typeof window !== 'undefined' && window.innerWidth < 760
 
 export const media = (key: string) => ({
-    video: small() ? `/media/${key}-720.mp4` : `/media/${key}.mp4`,
-    poster: `/media/${key}.webp`,
-    still: `/media/${key}-still.webp`,
+    video: asset(small() ? `media/${key}-720.mp4` : `media/${key}.mp4`),
+    poster: asset(`media/${key}.webp`),
+    band: asset(`media/${key}-band.webp`),
 })
 
 export const milestones = [

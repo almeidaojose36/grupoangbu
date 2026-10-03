@@ -168,7 +168,7 @@ export default function Layout() {
                             ) : (
                                 <a
                                     key={s.id}
-                                    href={`/#${s.id}`}
+                                    href={`${import.meta.env.BASE_URL}#${s.id}`}
                                     className="nav__link"
                                     onMouseEnter={() => setMegaOpen(false)}
                                     onClick={(e) => {
@@ -217,7 +217,7 @@ export default function Layout() {
                             <p className="eyebrow">As empresas do grupo</p>
                             <p className="mega__text">Seis empresas, um só padrão de excelência, de Cabinda para Angola.</p>
                             <a
-                                href="/#empresas"
+                                href={`${import.meta.env.BASE_URL}#empresas`}
                                 className="link-arrow"
                                 onClick={(e) => {
                                     e.preventDefault()
@@ -254,7 +254,7 @@ export default function Layout() {
                         {sections.map((s, i) => (
                             <a
                                 key={s.id}
-                                href={`/#${s.id}`}
+                                href={`${import.meta.env.BASE_URL}#${s.id}`}
                                 style={{ transitionDelay: menuOpen ? `${0.15 + i * 0.06}s` : '0s' }}
                                 onClick={(e) => {
                                     e.preventDefault()

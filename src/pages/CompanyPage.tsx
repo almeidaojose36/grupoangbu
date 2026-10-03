@@ -179,7 +179,7 @@ export default function CompanyPage({ company }: { company: Company }) {
             {/* ============ IMAGE BAND ============ */}
             {!still && (
                 <section className="band" data-theme="dark" aria-label={company.bandQuote}>
-                    <img className="band__img" src={`/media/${company.media}-band.webp`} alt="" loading="lazy" />
+                    <img className="band__img" src={m.band} alt="" loading="lazy" />
                     <div className="band__shade" />
                     <p className="band__quote display container">
                         <span className="line-mask"><span className="line">{company.bandQuote}</span></span>

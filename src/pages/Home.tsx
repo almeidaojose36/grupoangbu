@@ -6,7 +6,7 @@ import {
     revealLines, scrubWords, revealOnScroll, countUp, heroShrink, playWhenVisible, reducedMotion,
 } from '../lib/motion'
 import { scrollToTarget, useLenis } from '../components/SmoothScroll'
-import { clients, companies, leaders, media, milestones, yearsActive } from '../data/site'
+import { asset, clients, companies, leaders, media, milestones, yearsActive } from '../data/site'
 import journey from '../data/journey.json'
 
 const NUMBER_WORDS: Record<number, string> = { 9: 'Nove', 10: 'Dez', 11: 'Onze', 12: 'Doze', 13: 'Treze', 14: 'Catorze', 15: 'Quinze' }
@@ -65,7 +65,7 @@ export default function Home() {
                     const arrivals = journey.arrivals.map((a) => a.time)
                     // Desktop scrubs a 1080p video; phones a portrait crop made for tall screens.
                     const variant = window.innerWidth < 760 ? 'tall' : 'wide'
-                    film.poster = `/media/journey/${variant}.webp`
+                    film.poster = asset(`media/journey/${variant}.webp`)
 
                     // Seek to wherever the scroll says, one seek at a time so the decoder never queues up.
                     const clock = { t: 0 }
@@ -122,7 +122,7 @@ export default function Home() {
                         start: 'top bottom+=150%',
                         once: true,
                         onEnter: () => {
-                            film.src = `/media/journey/${variant}.mp4`
+                            film.src = asset(`media/journey/${variant}.mp4`)
                             film.play().then(() => film.pause(), () => {})
                         },
                     })
@@ -397,7 +397,7 @@ export default function Home() {
                                         {/* Still of the arrival frame, only for the reduced-motion layout. */}
                                         {staticLayout && <figure className="stage__shot">
                                             <img
-                                                src={`/media/journey/stop-${i + 1}.webp`}
+                                                src={asset(`media/journey/stop-${i + 1}.webp`)}
                                                 alt=""
                                                 loading="lazy"
                                             />
@@ -449,7 +449,7 @@ export default function Home() {
                         <div className="letter__photo">
                             <div className="letter__portrait">
                                 <img
-                                    src="/media/ceo.webp"
+                                    src={asset('media/ceo.webp')}
                                     alt="Engº Ângelo Gabriel Buanga, Fundador e Director Geral do Grupo ANGBU"
                                     width={1459}
                                     height={1078}

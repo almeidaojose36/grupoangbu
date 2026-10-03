@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "build:pages": "tsc && vite build --base=/grupoangbu/ && cp dist/index.html dist/404.html && touch dist/.nojekyll",
+    "deploy:pages": "npm run build:pages && cd dist && rm -rf .git && git init -q && git checkout -q -b gh-pages && git add -A && git commit -q -m 'Deploy to GitHub Pages' && git push -f https://github.com/almeidaojose36/grupoangbu.git gh-pages && rm -rf .git"
   },
   "devDependencies": {
     "@types/react": "^19.2.14",
