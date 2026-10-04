@@ -277,8 +277,18 @@ export const companies: Company[] = [
     },
 ]
 
-/** Phones get the 720p encode; larger screens the 1080p one. */
-const small = () => typeof window !== 'undefined' && window.innerWidth < 760
+type NetworkInfo = { saveData?: boolean; effectiveType?: string }
+
+/**
+ * The 720p encode for phones, screens that can't show more than 720p's pixels, and visitors on
+ * Data Saver or a slow connection; the 1080p one otherwise.
+ */
+const small = () => {
+    if (typeof window === 'undefined') return false
+    const net = (navigator as Navigator & { connection?: NetworkInfo }).connection
+    if (net?.saveData || /(^|-)[23]g$/.test(net?.effectiveType ?? '')) return true
+    return window.innerWidth < 760 || window.innerWidth * (window.devicePixelRatio || 1) <= 1280
+}
 
 export const media = (key: string) => ({
     video: asset(small() ? `media/${key}-720.mp4` : `media/${key}.mp4`),
