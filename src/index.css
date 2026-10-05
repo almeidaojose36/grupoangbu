@@ -942,6 +942,7 @@ ol {
 
 .pillar__rule,
 .leader__rule,
+.team__rule,
 .service__rule {
   position: absolute;
   top: 0;
@@ -1542,6 +1543,97 @@ ol {
   font-size: 0.97rem;
 }
 
+.leader__who {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  min-width: 0;
+}
+
+.leader__photo {
+  flex: none;
+  width: clamp(56px, 5vw, 76px);
+  height: auto;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  object-fit: cover;
+  align-self: center;
+  transition: transform 0.7s var(--ease);
+}
+
+.leader:hover .leader__photo {
+  transform: scale(1.06);
+}
+
+/* =====================================================================
+   TEAM
+   ===================================================================== */
+.leaders:has(+ .team) {
+  padding-bottom: clamp(40px, 6vh, 72px);
+}
+
+.team {
+  padding: clamp(40px, 6vh, 72px) 0 clamp(120px, 18vh, 200px);
+}
+
+.team__group {
+  margin-top: clamp(48px, 8vh, 88px);
+}
+
+.team__head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.team__head .eyebrow {
+  color: var(--fg);
+}
+
+.team__grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 2.4rem 1.6rem;
+}
+
+.member {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.member__photo {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: cover;
+  /* Cut from round ID-card portraits: a square would show the card's ring in its corners. */
+  border-radius: 50%;
+  margin-bottom: 0.9rem;
+  background: var(--line);
+  transition: transform 0.7s var(--ease);
+}
+
+.member:hover .member__photo {
+  transform: scale(1.04);
+}
+
+.member__name {
+  font-family: var(--serif);
+  font-size: clamp(1.15rem, 1.4vw, 1.35rem);
+  line-height: 1.2;
+}
+
+.member__role {
+  color: var(--muted);
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
 /* =====================================================================
    COMPANY PAGE SECTIONS
    ===================================================================== */
@@ -2011,6 +2103,10 @@ ol {
     grid-column: 2 / -1;
   }
 
+  .team__grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
   .roster__list {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -2050,6 +2146,10 @@ ol {
 @media (max-width: 860px) {
   :root {
     --nav-h: 68px;
+  }
+
+  .team__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .hero__foot {
@@ -2192,6 +2292,11 @@ ol {
 @media (max-width: 560px) {
   body {
     font-size: 1rem;
+  }
+
+  .team__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.8rem 1rem;
   }
 
   .hero__title {

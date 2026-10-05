@@ -277,8 +277,18 @@ export const companies: Company[] = [
     },
 ]
 
-/** Phones get the 720p encode; larger screens the 1080p one. */
-const small = () => typeof window !== 'undefined' && window.innerWidth < 760
+type NetworkInfo = { saveData?: boolean; effectiveType?: string }
+
+/**
+ * The 720p encode for phones, screens that can't show more than 720p's pixels, and visitors on
+ * Data Saver or a slow connection; the 1080p one otherwise.
+ */
+const small = () => {
+    if (typeof window === 'undefined') return false
+    const net = (navigator as Navigator & { connection?: NetworkInfo }).connection
+    if (net?.saveData || /(^|-)[23]g$/.test(net?.effectiveType ?? '')) return true
+    return window.innerWidth < 760 || window.innerWidth * (window.devicePixelRatio || 1) <= 1280
+}
 
 export const media = (key: string) => ({
     video: asset(small() ? `media/${key}-720.mp4` : `media/${key}.mp4`),
@@ -302,7 +312,62 @@ export const clients = [
 ]
 
 export const leaders = [
-    { name: 'Ângelo Gabriel Buanga', role: 'Fundador e Director Geral', text: 'Principal estratega e visionário do grupo, com uma liderança orientada para resultados e inovação desde a fundação.' },
-    { name: 'Albertina Buanga', role: 'Directora de Capital Humano', text: 'Responsável pela gestão de talentos e pelo desenvolvimento do capital humano, cultivando uma cultura organizacional positiva.' },
-    { name: 'Nataniel Massiala', role: 'Director Administrativo', text: 'Assegura a eficiência dos processos operacionais e administrativos e o cumprimento dos objectivos internos.' },
+    { name: 'Ângelo Gabriel Buanga', photo: 'angelo-buanga', role: 'Fundador e Director Geral', text: 'Principal estratega e visionário do grupo, com uma liderança orientada para resultados e inovação desde a fundação.' },
+    { name: 'Albertina Buanga', photo: 'albertina-buanga', role: 'Directora de Capital Humano', text: 'Responsável pela gestão de talentos e pelo desenvolvimento do capital humano, cultivando uma cultura organizacional positiva.' },
+    { name: 'Nataniel Massiala', photo: 'nataniel-massiala', role: 'Director Administrativo', text: 'Assegura a eficiência dos processos operacionais e administrativos e o cumprimento dos objectivos internos.' },
+]
+
+/** Portrait in public/media/team/, by file name. */
+export const teamPhoto = (photo: string) => asset(`media/team/${photo}.webp`)
+
+type Member = { name: string; role: string; photo: string }
+
+/** The rest of the team, grouped by where they work: the group's central services, then each company. */
+export const team: { company?: string; label: string; members: Member[] }[] = [
+    {
+        label: 'Serviços centrais',
+        members: [
+            { name: 'Jerusalém Panguila', role: 'Coordenador Administrativo', photo: 'jerusalem-panguila' },
+            { name: 'Sabino José', role: 'Tesoureiro e Assistente de Contabilidade', photo: 'sabino-jose' },
+            { name: 'Alexandre Zau', role: 'Assistente de Recursos Humanos', photo: 'alexandre-zau' },
+            { name: 'Pascoalina Lembe', role: 'Assistente Administrativa e Comercial', photo: 'pascoalina-lembe' },
+            { name: 'Martinho Gomes', role: 'Técnico de Impressoras', photo: 'martinho-gomes' },
+            { name: 'Gustavo Lando', role: 'Técnico de Hardware', photo: 'gustavo-lando' },
+            { name: 'Armindo Futi', role: 'Motorista', photo: 'armindo-futi' },
+            { name: 'Armando Trigo', role: 'Vigilante', photo: 'armando-trigo' },
+            { name: 'Foiba Mavungo', role: 'Auxiliar de Serviços Gerais', photo: 'foiba-mavungo' },
+            { name: 'Juliana Mbuca', role: 'Auxiliar de Serviços Gerais', photo: 'juliana-mbuca' },
+        ],
+    },
+    {
+        company: 'cab-racao',
+        label: 'Cab-Ração',
+        members: [
+            { name: 'Walter Mavinga', role: 'Chefe de Produção', photo: 'walter-mavinga' },
+            { name: 'Lumpini José', role: 'Técnico de Produção', photo: 'lumpini-jose' },
+            { name: 'Gabriel Chibengue', role: 'Técnico de Produção', photo: 'gabriel-chibengue' },
+            { name: 'Ana de Carvalho', role: 'Auxiliar Administrativa', photo: 'ana-de-carvalho' },
+            { name: 'Maria Mancafi', role: 'Cozinheira', photo: 'maria-mancafi' },
+        ],
+    },
+    {
+        company: 'tchiowa-net',
+        label: 'Tchiowa Net',
+        members: [
+            { name: 'António Balo', role: 'Técnico Sénior de Internet', photo: 'antonio-balo' },
+            { name: 'João Mavada', role: 'Técnico Sénior de Internet', photo: 'joao-mavada' },
+            { name: 'Silva Lombo', role: 'Técnico Júnior de Qualidade e Suporte', photo: 'silva-lombo' },
+            { name: 'Reginaldo Ntinguili', role: 'Técnico Júnior de Qualidade e Suporte', photo: 'reginaldo-ntinguili' },
+            { name: 'Jaqueline M. Inácio', role: 'Assistente de Marketing', photo: 'jaqueline-inacio' },
+            { name: 'Serafim S. Londa', role: 'Assistente de Marketing', photo: 'serafim-londa' },
+        ],
+    },
+    {
+        company: 'atc',
+        label: 'Angbu Training Center',
+        members: [
+            { name: 'Verônica Tribúrcio', role: 'Formadora', photo: 'veronica-triburcio' },
+            { name: 'José Goma', role: 'Formador', photo: 'jose-goma' },
+        ],
+    },
 ]

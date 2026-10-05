@@ -6,7 +6,7 @@ import {
     revealLines, scrubWords, revealOnScroll, countUp, heroShrink, playWhenVisible, reducedMotion,
 } from '../lib/motion'
 import { scrollToTarget, useLenis } from '../components/SmoothScroll'
-import { asset, clients, companies, leaders, media, milestones, yearsActive } from '../data/site'
+import { asset, clients, companies, leaders, media, milestones, team, teamPhoto, yearsActive } from '../data/site'
 import journey from '../data/journey.json'
 
 const NUMBER_WORDS: Record<number, string> = { 9: 'Nove', 10: 'Dez', 11: 'Onze', 12: 'Doze', 13: 'Treze', 14: 'Catorze', 15: 'Quinze' }
@@ -520,12 +520,50 @@ export default function Home() {
                             <li className="leader" key={l.name} data-reveal={i * 0.05}>
                                 <span className="leader__rule" data-rule />
                                 <span className="leader__n">0{i + 1}</span>
-                                <h3 className="leader__name display">{l.name}</h3>
+                                <div className="leader__who">
+                                    <img className="leader__photo" src={teamPhoto(l.photo)} alt="" width={360} height={360} loading="lazy" />
+                                    <h3 className="leader__name display">{l.name}</h3>
+                                </div>
                                 <span className="leader__role eyebrow">{l.role}</span>
                                 <p>{l.text}</p>
                             </li>
                         ))}
                     </ol>
+                </div>
+            </section>
+
+            {/* ============ TEAM ============ */}
+            <section id="equipa" className="team" data-theme="light">
+                <div className="container">
+                    <div className="sec-head" data-reveal>
+                        <span className="eyebrow">Equipa</span>
+                        <span className="sec-num">(07)</span>
+                    </div>
+                    <h2 className="section-title display js-lines">
+                        Quem faz o grupo <em>acontecer</em> todos os dias.
+                    </h2>
+                    {team.map((g) => (
+                        <div className="team__group" key={g.label}>
+                            <div className="team__head" data-reveal>
+                                <span className="team__rule" data-rule />
+                                <h3 className="eyebrow">{g.label}</h3>
+                                {g.company && (
+                                    <Link to={`/empresa/${g.company}`} className="link-arrow">
+                                        Ver empresa <ArrowUpRight size={14} aria-hidden />
+                                    </Link>
+                                )}
+                            </div>
+                            <ul className="team__grid">
+                                {g.members.map((m, i) => (
+                                    <li className="member" key={m.name} data-reveal={(i % 5) * 0.05}>
+                                        <img className="member__photo" src={teamPhoto(m.photo)} alt="" width={360} height={360} loading="lazy" />
+                                        <span className="member__name">{m.name}</span>
+                                        <span className="member__role">{m.role}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
                 </div>
             </section>
         </div>
